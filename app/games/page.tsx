@@ -20,11 +20,27 @@ const games: Game[] = [
   {
     id: "minecraft",
     name: "Minecraft 1.8.8",
-    url: "https://eaglercraft.com/mc/1.8.8/",
+    url: "https://eaglercraft-unblocked.neocities.org/152/",
     category: "Survival",
     description: "The classic Minecraft 1.8.8 experience in your browser. Build, explore, and survive!",
     image: "/games/minecraft.png",
   },
+  {
+    id: "snow",
+    name: "Snow Rider 3D",
+    url: "/games/snow.html",
+    category: "Survival",
+    description: "Snow Rider 3D | master the snowy slopes on your sled.",
+    image: "/games/snow.png",
+  },
+  {
+   id: "arc",
+    name: "ARC",
+    url: "/games/arc.html",
+    category: "Survival",
+    description: "Ragdoll Archers | aim, shoot, and defeat enemies with ragdoll physics.",
+    image: "/games/arc.png",
+    },
 ]
 
 const categories = ["All", "Survival"]
