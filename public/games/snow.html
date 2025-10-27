@@ -1,4 +1,28 @@
-<iframe data-testid="gabe-frabe" id="gabe-frabe" allowfullscreen="" allow="autoplay; fullscreen; camera; focus-without-user-activation *; monetization; gamepad;
-           keyboard-map *; xr-spatial-tracking; clipboard-write" name="appFrame" scrolling="no" sandbox="allow-forms allow-modals allow-orientation-lock allow-pointer-lock
-              allow-popups allow-popups-to-escape-sandbox allow-presentation allow-scripts allow-same-origin
-              allow-downloads" src="https://db.ducklit.com/html/snow_rider_3d/index.html" style="width: 100%; min-height: 60vh; height: 100%; border: none;"></iframe>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fullscreen Iframe</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    iframe {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <iframe src="https://script.google.com/macros/s/AKfycbw5Z-Ryg_JfIIDYH7pzzPKXlr2tN0HCw-tT_ZvxBGDPsDDY41ewPVneVeLzelfpnBab/exec" allowfullscreen></iframe>
+</body>
+</html>

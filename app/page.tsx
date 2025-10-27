@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { Card } from "@/components/ui/card"
+import { AdminPanel } from "@/components/admin-panel"
 
 type ScheduleInfo = {
   day: string
@@ -152,6 +153,9 @@ export default function HomePage() {
             </Card>
           </div>
         </div>
+
+        {/* Admin Panel */}
+        <AdminPanel />
       </div>
     </div>
   )
