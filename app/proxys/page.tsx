@@ -10,13 +10,15 @@ import { toast } from "sonner"
 export default function ProxysPage() {
   const [isLoading, setIsLoading] = useState(false)
   const [loadingProgress, setLoadingProgress] = useState(0)
+  const [loadingProxy, setLoadingProxy] = useState<string>("")
 
-  const handleLaunchProxy = (url: string) => {
+  const handleLaunchProxy = (url: string, proxyName: string) => {
     toast.loading("Launching...", {
       duration: 2000,
     })
     setIsLoading(true)
     setLoadingProgress(0)
+    setLoadingProxy(proxyName)
 
     const interval = setInterval(() => {
       setLoadingProgress((prev) => {
@@ -26,6 +28,7 @@ export default function ProxysPage() {
           setTimeout(() => {
             setIsLoading(false)
             setLoadingProgress(0)
+            setLoadingProxy("")
           }, 500)
           return 100
         }
@@ -44,18 +47,25 @@ export default function ProxysPage() {
           <div className="text-center space-y-6 p-8 rounded-2xl bg-gradient-to-br from-card/90 to-card/50 border border-primary/20 shadow-2xl max-w-md w-full mx-4 backdrop-blur-xl">
             <div className="relative w-24 h-24 mx-auto">
               <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-blue-500/20 rounded-full blur-xl animate-pulse" />
-              <Image
-                src="/xenos-logo.png"
-                alt="XenOS Logo"
-                width={96}
-                height={96}
-                className="object-contain mix-blend-lighten animate-pulse relative z-10"
-              />
+              {loadingProxy === "Xen Proxy" ? (
+                <Image
+                  src="/xenos-logo.png"
+                  alt="XenOS Logo"
+                  width={96}
+                  height={96}
+                  className="object-contain mix-blend-lighten animate-pulse relative z-10"
+                />
+              ) : (
+                <div className="relative z-10 flex items-center justify-center w-24 h-24">
+                  <Cloud className="h-16 w-16 text-white stroke-[1.5] animate-pulse" />
+                  <Zap className="h-8 w-8 text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/4 stroke-[2] animate-pulse" />
+                </div>
+              )}
             </div>
 
             <div className="space-y-3">
               <h2 className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
-                Launching Xen Proxy
+                Launching {loadingProxy}
               </h2>
               <p className="text-muted-foreground">Establishing secure connection...</p>
             </div>
@@ -92,11 +102,9 @@ export default function ProxysPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 animate-slide-in">
           <Card className="group relative overflow-hidden bg-gradient-to-br from-card/80 to-card/40 border-border/50 hover:border-primary/50 transition-all duration-500 backdrop-blur-sm">
-            {/* Animated gradient overlay on hover */}
             <div className="absolute inset-0 bg-gradient-to-br from-purple-500/0 via-blue-500/0 to-purple-500/0 group-hover:from-purple-500/10 group-hover:via-blue-500/10 group-hover:to-purple-500/10 transition-all duration-500" />
 
             <div className="relative p-6 flex flex-col items-center gap-4 text-center">
-              {/* Enhanced proxy icon with glow effect */}
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-purple-500/30 to-blue-500/30 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500 scale-75 group-hover:scale-100" />
                 <div className="relative w-20 h-20 rounded-xl overflow-hidden bg-gradient-to-br from-background/80 to-background/40 flex items-center justify-center border border-border/50 group-hover:border-primary/30 transition-all duration-500 group-hover:scale-110 group-hover:rotate-3">
@@ -110,7 +118,6 @@ export default function ProxysPage() {
                 </div>
               </div>
 
-              {/* Enhanced proxy name with gradient */}
               <div className="space-y-1">
                 <h3 className="text-xl font-bold bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent group-hover:from-purple-400 group-hover:to-blue-400 transition-all duration-500">
                   Xen Proxy
@@ -118,9 +125,8 @@ export default function ProxysPage() {
                 <p className="text-xs text-muted-foreground">Fast & Secure</p>
               </div>
 
-              {/* Enhanced launch button */}
               <Button
-                onClick={() => handleLaunchProxy("https://xen-os.dev")}
+                onClick={() => handleLaunchProxy("https://xen-os.dev", "Xen Proxy")}
                 disabled={isLoading}
                 className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 text-white font-semibold transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-primary/25 disabled:opacity-50 disabled:cursor-not-allowed relative overflow-hidden"
               >
@@ -153,7 +159,7 @@ export default function ProxysPage() {
               </div>
 
               <Button
-                onClick={() => handleLaunchProxy("https://au.ahern.cc/indev")}
+                onClick={() => handleLaunchProxy("https://au.ahern.cc/indev", "Ahern Proxy")}
                 className="w-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white font-semibold transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-primary/25 relative overflow-hidden"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />

@@ -155,3 +155,60 @@
 .animate-slide-in {
   animation: slideIn 0.5s ease-out;
 }
+
+/* Added animated text hover effects */
+@keyframes textPop {
+  0% {
+    transform: scale(1) translateY(0);
+  }
+  50% {
+    transform: scale(1.1) translateY(-2px);
+  }
+  100% {
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient {
+  animation: gradient 3s ease infinite;
+}
+
+.text-hover-pop {
+  display: inline-block;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.text-hover-pop:hover {
+  animation: textPop 0.4s ease;
+  color: hsl(var(--primary));
+  text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+}
+
+/* Added glassmorphism effect */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Added glow effect for interactive elements */
+.glow-on-hover {
+  transition: all 0.3s ease;
+}
+
+.glow-on-hover:hover {
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.4), 0 0 40px rgba(147, 51, 234, 0.2);
+  transform: translateY(-2px);
+}

@@ -6,6 +6,7 @@ import { Navigation } from "@/components/navigation"
 import { SiteLock } from "@/components/site-lock"
 import { Toaster } from "sonner"
 import { NotificationSystem } from "@/components/notification-system"
+import { StealthMode } from "@/components/stealth-mode"
 
 const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
@@ -23,7 +24,8 @@ export default function RootLayout({
           <main className="min-h-screen bg-background pt-16">{children}</main>
           <Analytics />
           <NotificationSystem />
-          <Toaster position="top-right" theme="dark" richColors />
+          <StealthMode />
+          <Toaster position="top-right" theme="dark" richColors duration={2000} />
         </SiteLock>
       </body>
     </html>
