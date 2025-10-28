@@ -6,7 +6,6 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Search, X, Maximize2, AlertCircle, Heart, Sparkles } from "lucide-react"
 import Image from "next/image"
-import { toast } from "sonner"
 
 type Game = {
   id: string
@@ -50,9 +49,41 @@ const games: Game[] = [
     description: "Cookie Clicker | Bake endless cookies, upgrade your bakery, and build a cookie empire!",
     image: "/games/cc.png",
   },
+  {
+    id: "arc",
+    name: "Ragdoll Archers",
+    url: "/games/arc.html",
+    category: "Survival",
+    description: "Ragdoll Archers | Battle your opponents with wobbly physics and precise aim — every shot counts in this hilarious ragdoll archery duel!",
+    image: "/games/arc.png",
+  },
+    {
+    id: "raft",
+    name: "Raft",
+    url: "/games/raft.html",
+    category: "Survival",
+    description: "Raft | Survive at sea by gathering debris, crafting tools, and expanding your floating home while facing the dangers of the deep.",
+    image: "/games/raft.png",
+  },
+    {
+    id: "gs",
+    name: "Gunspin",
+    url: "/games/gs.html",
+    category: "Physics",
+    description: "Gun Spin | Fire your weapon to propel yourself through the air — master the physics, upgrade your guns, and see how far you can fly!",
+    image: "/games/gs.png",
+  },   
+    {
+    id: "gs",
+    name: "Gun Mayhem",
+    url: "/games/gmay.html",
+    category: "Action",
+    description: "Gun Mayhem | Jump into chaotic arena battles where fast reflexes, wild weapons, and explosions decide who stays on the platform the longest!",
+    image: "/games/gmay.png",
+  },   
 ]
 
-const categories = ["All", "Favorites", "Survival", "Sports", "Idle"]
+const categories = ["All", "Favorites", "Survival", "Sports", "Idle", "Physics", "Action"]
 
 export default function GamesPage() {
   const [searchQuery, setSearchQuery] = useState("")
@@ -96,9 +127,6 @@ export default function GamesPage() {
   })
 
   const launchGame = (game: Game) => {
-    toast.loading("Launching...", {
-      duration: 2000,
-    })
     setFullscreenGame(game)
     setIsGameLoading(true)
   }

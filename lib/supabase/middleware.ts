@@ -28,7 +28,6 @@ export async function updateSession(request: NextRequest) {
   const protectedRoutes = ["/chat", "/profile", "/friends"]
   const isProtectedRoute = protectedRoutes.some((route) => request.nextUrl.pathname.startsWith(route))
 
-  // Only check user authentication if accessing a protected route
   if (isProtectedRoute) {
     const {
       data: { user },

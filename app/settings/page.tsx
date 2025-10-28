@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label"
 import { Switch } from "@/components/ui/switch"
 import { Button } from "@/components/ui/button"
 import { toast } from "sonner"
-import { Moon, Sun, Shield, Palette } from "lucide-react"
+import { Moon, Sun, Shield, Palette, Sparkles } from "lucide-react"
 
 export default function SettingsPage() {
   const [stealthMode, setStealthMode] = useState(false)
@@ -15,7 +15,6 @@ export default function SettingsPage() {
 
   useEffect(() => {
     setMounted(true)
-    // Load settings from localStorage
     const savedStealthMode = localStorage.getItem("stealthModeEnabled") === "true"
     const savedTheme = (localStorage.getItem("theme") as "dark" | "light" | "blue" | "purple") || "dark"
     setStealthMode(savedStealthMode)
@@ -26,13 +25,9 @@ export default function SettingsPage() {
   const applyTheme = (newTheme: "dark" | "light" | "blue" | "purple") => {
     const root = document.documentElement
 
-    // Remove all theme classes
     root.classList.remove("theme-dark", "theme-light", "theme-blue", "theme-purple")
-
-    // Add new theme class
     root.classList.add(`theme-${newTheme}`)
 
-    // Apply theme colors
     switch (newTheme) {
       case "light":
         root.style.setProperty("--background", "255 255 255")
@@ -59,7 +54,7 @@ export default function SettingsPage() {
         root.style.setProperty("--border", "63 63 70")
         root.style.setProperty("--primary", "168 85 247")
         break
-      default: // dark
+      default:
         root.style.setProperty("--background", "0 0 0")
         root.style.setProperty("--foreground", "255 255 255")
         root.style.setProperty("--card", "23 23 23")
@@ -92,18 +87,21 @@ export default function SettingsPage() {
   return (
     <div className="min-h-screen pt-24 pb-12 px-4">
       <div className="container mx-auto max-w-4xl space-y-8">
-        <div>
-          <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-            Settings
-          </h1>
+        <div className="text-center space-y-3 animate-fade-in">
+          <div className="flex items-center justify-center gap-3 mb-2">
+            <Sparkles className="h-8 w-8 text-primary animate-pulse" />
+            <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
+              Settings
+            </h1>
+            <Sparkles className="h-8 w-8 text-primary animate-pulse" style={{ animationDelay: "0.5s" }} />
+          </div>
           <p className="text-muted-foreground">Customize your Calcify experience</p>
         </div>
 
-        {/* Theme Settings */}
-        <Card className="border-border bg-card/50 backdrop-blur-xl">
+        <Card className="border-border bg-card/50 backdrop-blur-xl hover:border-primary/30 transition-all duration-300 shadow-lg">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Palette className="h-5 w-5" />
+            <CardTitle className="flex items-center gap-2 text-xl">
+              <Palette className="h-5 w-5 text-primary" />
               Theme
             </CardTitle>
             <CardDescription>Choose your preferred color scheme</CardDescription>
@@ -112,53 +110,52 @@ export default function SettingsPage() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <Button
                 variant={theme === "dark" ? "default" : "outline"}
-                className="h-20 flex-col gap-2"
+                className="h-24 flex-col gap-3 hover:scale-105 transition-transform duration-300"
                 onClick={() => handleThemeChange("dark")}
               >
-                <Moon className="h-6 w-6" />
-                <span>Dark</span>
+                <Moon className="h-7 w-7" />
+                <span className="font-semibold">Dark</span>
               </Button>
               <Button
                 variant={theme === "light" ? "default" : "outline"}
-                className="h-20 flex-col gap-2"
+                className="h-24 flex-col gap-3 hover:scale-105 transition-transform duration-300"
                 onClick={() => handleThemeChange("light")}
               >
-                <Sun className="h-6 w-6" />
-                <span>Light</span>
+                <Sun className="h-7 w-7" />
+                <span className="font-semibold">Light</span>
               </Button>
               <Button
                 variant={theme === "blue" ? "default" : "outline"}
-                className="h-20 flex-col gap-2"
+                className="h-24 flex-col gap-3 hover:scale-105 transition-transform duration-300"
                 onClick={() => handleThemeChange("blue")}
               >
-                <div className="h-6 w-6 rounded-full bg-blue-500" />
-                <span>Blue</span>
+                <div className="h-7 w-7 rounded-full bg-blue-500 shadow-lg shadow-blue-500/50" />
+                <span className="font-semibold">Blue</span>
               </Button>
               <Button
                 variant={theme === "purple" ? "default" : "outline"}
-                className="h-20 flex-col gap-2"
+                className="h-24 flex-col gap-3 hover:scale-105 transition-transform duration-300"
                 onClick={() => handleThemeChange("purple")}
               >
-                <div className="h-6 w-6 rounded-full bg-purple-500" />
-                <span>Purple</span>
+                <div className="h-7 w-7 rounded-full bg-purple-500 shadow-lg shadow-purple-500/50" />
+                <span className="font-semibold">Purple</span>
               </Button>
             </div>
           </CardContent>
         </Card>
 
-        {/* Stealth Mode */}
-        <Card className="border-border bg-card/50 backdrop-blur-xl">
+        <Card className="border-border bg-card/50 backdrop-blur-xl hover:border-primary/30 transition-all duration-300 shadow-lg">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Shield className="h-5 w-5" />
+            <CardTitle className="flex items-center gap-2 text-xl">
+              <Shield className="h-5 w-5 text-primary" />
               Stealth Mode
             </CardTitle>
             <CardDescription>Press Alt+Z to quickly hide Calcify with a fake login screen</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="flex items-center justify-between">
-              <div className="space-y-0.5">
-                <Label htmlFor="stealth-mode" className="text-base">
+            <div className="flex items-center justify-between p-4 rounded-lg bg-accent/5 hover:bg-accent/10 transition-colors">
+              <div className="space-y-1">
+                <Label htmlFor="stealth-mode" className="text-base font-semibold cursor-pointer">
                   Enable Stealth Mode
                 </Label>
                 <p className="text-sm text-muted-foreground">Panic button (Alt+Z) to show Clever login</p>
@@ -168,21 +165,24 @@ export default function SettingsPage() {
           </CardContent>
         </Card>
 
-        {/* Keyboard Shortcuts */}
-        <Card className="border-border bg-card/50 backdrop-blur-xl">
+        <Card className="border-border bg-card/50 backdrop-blur-xl hover:border-primary/30 transition-all duration-300 shadow-lg">
           <CardHeader>
-            <CardTitle>Keyboard Shortcuts</CardTitle>
+            <CardTitle className="text-xl">Keyboard Shortcuts</CardTitle>
             <CardDescription>Quick actions to enhance your experience</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
-              <div className="flex items-center justify-between py-2 border-b border-border">
-                <span className="text-sm">Toggle Stealth Mode</span>
-                <kbd className="px-2 py-1 text-xs bg-muted rounded border border-border">Alt + Z</kbd>
+              <div className="flex items-center justify-between py-3 px-4 rounded-lg bg-accent/5 hover:bg-accent/10 transition-colors">
+                <span className="text-sm font-medium">Toggle Stealth Mode</span>
+                <kbd className="px-3 py-1.5 text-xs font-semibold bg-muted rounded-md border border-border shadow-sm">
+                  Alt + Z
+                </kbd>
               </div>
-              <div className="flex items-center justify-between py-2 border-b border-border">
-                <span className="text-sm">Exit Fullscreen Game</span>
-                <kbd className="px-2 py-1 text-xs bg-muted rounded border border-border">ESC</kbd>
+              <div className="flex items-center justify-between py-3 px-4 rounded-lg bg-accent/5 hover:bg-accent/10 transition-colors">
+                <span className="text-sm font-medium">Exit Fullscreen Game</span>
+                <kbd className="px-3 py-1.5 text-xs font-semibold bg-muted rounded-md border border-border shadow-sm">
+                  ESC
+                </kbd>
               </div>
             </div>
           </CardContent>
